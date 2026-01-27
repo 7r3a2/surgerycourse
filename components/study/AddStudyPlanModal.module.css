@@ -1,0 +1,321 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.section {
+    padding: var(--spacing-lg);
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--gray-100);
+}
+
+.sectionTitle {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: 0 0 var(--spacing-md) 0;
+    font-size: 1rem;
+    color: var(--gray-800);
+}
+
+.stepNumber {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-teal) 0%, #14b8a6 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.selectedCount {
+    margin-left: auto;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary-teal);
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+}
+
+.field:last-child {
+    margin-bottom: 0;
+}
+
+.label {
+    font-weight: 600;
+    color: var(--gray-600);
+    font-size: 0.8rem;
+}
+
+.input,
+.select {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+    font-family: inherit;
+    background: white;
+}
+
+.input:focus,
+.select:focus {
+    border-color: var(--primary-teal);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+}
+
+.select {
+    cursor: pointer;
+}
+
+.dateRange {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+/* Subjects List */
+.subjectsList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.subjectItem {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: white;
+    border: 2px solid var(--gray-200);
+    border-left: 4px solid;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.subjectItem:hover {
+    border-color: var(--primary-teal);
+    border-left-width: 4px;
+}
+
+.selectedSubject {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(20, 184, 166, 0.1) 100%);
+    border-color: var(--primary-teal);
+}
+
+.subjectInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.subjectName {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--gray-800);
+}
+
+.topicCount {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+}
+
+/* Topics List */
+.selectAllBtn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: white;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-bottom: var(--spacing-sm);
+}
+
+.selectAllBtn:hover {
+    border-color: var(--primary-teal);
+    color: var(--primary-teal);
+}
+
+.topicsList {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 180px;
+    overflow-y: auto;
+    padding: var(--spacing-xs);
+}
+
+.topicItem {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: white;
+    border: 2px solid var(--gray-200);
+    border-left: 4px solid;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: 0.9rem;
+}
+
+.topicItem:hover {
+    border-color: var(--primary-teal);
+    border-left-width: 4px;
+}
+
+.selectedTopic {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(20, 184, 166, 0.1) 100%);
+    border-color: var(--primary-teal);
+}
+
+.topicInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.topicSubject {
+    font-size: 0.7rem;
+    color: var(--gray-500);
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin: 0;
+    accent-color: var(--primary-teal);
+}
+
+.completedTopic {
+    text-decoration: line-through;
+    color: var(--gray-500);
+}
+
+.completedBadge {
+    margin-left: auto;
+    color: #10b981;
+    font-weight: 700;
+}
+
+.preview {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.15) 0%, rgba(20, 184, 166, 0.1) 100%);
+    border: 2px solid var(--primary-teal);
+    border-radius: var(--radius-lg);
+}
+
+.previewStats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.previewStat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.statValue {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-teal);
+}
+
+.statLabel {
+    font-size: 0.7rem;
+    color: var(--gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.previewDivider {
+    color: var(--gray-400);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: flex-end;
+    margin-top: var(--spacing-sm);
+}
+
+.emptyState {
+    padding: var(--spacing-lg);
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    color: var(--gray-600);
+}
+
+.emptyState p {
+    margin: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .form {
+        gap: var(--spacing-md);
+    }
+
+    .section {
+        padding: var(--spacing-md);
+    }
+
+    .dateRange {
+        grid-template-columns: 1fr;
+    }
+
+    .input,
+    .select {
+        padding: var(--spacing-sm);
+        font-size: 0.9rem;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+
+    .previewStats {
+        flex-wrap: wrap;
+    }
+
+    .topicsList,
+    .subjectsList {
+        max-height: 120px;
+    }
+}

@@ -1,0 +1,270 @@
+.container {
+    text-align: center;
+    padding: var(--spacing-2xl);
+}
+
+.sessionInfo {
+    margin-bottom: var(--spacing-2xl);
+    padding: var(--spacing-xl);
+    background: var(--gradient-soft);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.subject {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-teal);
+    margin-bottom: var(--spacing-xs);
+}
+
+.topic {
+    font-size: 1.125rem;
+    color: var(--gray-700);
+}
+
+.timerCircle {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto var(--spacing-2xl) auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.progressRing {
+    transform: rotate(-90deg);
+    filter: drop-shadow(0 4px 20px rgba(13, 148, 136, 0.3));
+}
+
+.progressRingProgress {
+    transition: stroke-dashoffset 1s linear;
+    stroke-linecap: round;
+}
+
+.timerText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.time {
+    font-size: 8rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    margin-bottom: var(--spacing-md);
+}
+
+.label {
+    font-size: 1.25rem;
+    color: var(--gray-600);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.controls {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--spacing-xl);
+}
+
+.completionMessage {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+    border-radius: var(--radius-2xl);
+    animation: scaleIn 0.5s ease-out;
+    margin-top: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.completionMessage h3 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.completionMessage p {
+    font-size: 1.25rem;
+    color: var(--gray-600);
+    margin: 0 0 var(--spacing-lg) 0;
+}
+
+.musicNote {
+    font-size: 1rem;
+    color: var(--primary-teal);
+    font-weight: 600;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .timerCircle {
+        width: 400px;
+        height: 400px;
+    }
+
+    .time {
+        font-size: 6rem;
+    }
+
+    .subject {
+        font-size: 1.375rem;
+    }
+
+    .topic {
+        font-size: 1rem;
+    }
+
+    .completionMessage h3 {
+        font-size: 2.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: var(--spacing-lg);
+    }
+
+    .sessionInfo {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .subject {
+        font-size: 1.25rem;
+    }
+
+    .topic {
+        font-size: 1rem;
+    }
+
+    .timerCircle {
+        width: 280px;
+        height: 280px;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .time {
+        font-size: 4rem;
+    }
+
+    .label {
+        font-size: 1rem;
+    }
+
+    .controls {
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-md);
+    }
+
+    .completionMessage {
+        padding: var(--spacing-lg);
+        margin-top: var(--spacing-md);
+    }
+
+    .completionMessage h3 {
+        font-size: 2rem;
+    }
+
+    .completionMessage p {
+        font-size: 1.125rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: var(--spacing-md);
+    }
+
+    .sessionInfo {
+        padding: var(--spacing-sm);
+    }
+
+    .subject {
+        font-size: 1.125rem;
+    }
+
+    .topic {
+        font-size: 0.9rem;
+    }
+
+    .timerCircle {
+        width: 240px;
+        height: 240px;
+    }
+
+    .time {
+        font-size: 3.5rem;
+    }
+
+    .label {
+        font-size: 0.875rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        width: 100%;
+        gap: var(--spacing-sm);
+    }
+
+    .controls button {
+        width: 100%;
+    }
+
+    .completionMessage h3 {
+        font-size: 1.75rem;
+    }
+
+    .completionMessage p {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,146 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String            @id @default(uuid())
+  username      String            @unique
+  password      String
+  isAdmin       Boolean           @default(false)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  completions   TopicCompletion[]
+  calendarTasks CalendarTask[]
+  dayColors     DayColor[]
+  studyPlans    StudyPlan[]
+
+  @@map("users")
+}
+
+model MainSubject {
+  id          String    @id @default(uuid())
+  title       String
+  description String?
+  color       String
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  subjects    Subject[]
+
+  @@map("main_subjects")
+}
+
+model Subject {
+  id            String      @id @default(uuid())
+  mainSubjectId String
+  title         String
+  description   String?
+  color         String
+  order         Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  mainSubject   MainSubject @relation(fields: [mainSubjectId], references: [id], onDelete: Cascade)
+  topics        Topic[]
+
+  @@map("subjects")
+}
+
+model Topic {
+  id          String            @id @default(uuid())
+  subjectId   String
+  title       String
+  dueDate     DateTime?
+  order       Int               @default(0)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  subject     Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  completions TopicCompletion[]
+
+  @@map("topics")
+}
+
+model TopicCompletion {
+  id        String   @id @default(uuid())
+  userId    String
+  topicId   String
+  completed Boolean  @default(true)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topic     Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, topicId])
+  @@map("topic_completions")
+}
+
+model FocusSession {
+  id          String   @id @default(uuid())
+  duration    Int
+  completedAt BigInt
+  subjectName String?
+  topicName   String?
+  createdAt   DateTime @default(now())
+
+  @@map("focus_sessions")
+}
+
+model CalendarTask {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  date      DateTime
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("calendar_tasks")
+}
+
+model DayColor {
+  id        String   @id @default(uuid())
+  userId    String
+  date      DateTime
+  color     String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@map("day_colors")
+}
+
+model StudyPlan {
+  id             String           @id @default(uuid())
+  userId         String
+  name           String
+  startDate      DateTime
+  endDate        DateTime
+  createdAt      DateTime         @default(now())
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scheduledTopics ScheduledTopic[]
+
+  @@index([userId])
+  @@map("study_plans")
+}
+
+model ScheduledTopic {
+  id             String    @id @default(uuid())
+  studyPlanId    String
+  topicId        String
+  scheduledDate  DateTime
+  completed      Boolean   @default(false)
+  topicTitle     String
+  subjectId      String
+  subjectTitle   String
+  mainSubjectId  String
+  mainSubjectTitle String
+  subjectColor   String
+  studyPlan      StudyPlan @relation(fields: [studyPlanId], references: [id], onDelete: Cascade)
+
+  @@index([studyPlanId])
+  @@map("scheduled_topics")
+}

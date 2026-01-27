@@ -1,0 +1,124 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--gray-200);
+}
+
+.header h3 {
+    font-size: 1.5rem;
+    margin: 0;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.score {
+    font-size: 1rem;
+    color: var(--primary-teal);
+    font-weight: 700;
+}
+
+.instructions {
+    text-align: center;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xl);
+    font-style: italic;
+}
+
+.game {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+}
+
+.column h4 {
+    text-align: center;
+    color: var(--gray-700);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.125rem;
+}
+
+.item {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-lg);
+    background: white;
+    color: var(--gray-800);
+    font-size: 0.938rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item:hover:not(:disabled) {
+    border-color: var(--primary-teal);
+    background: var(--gray-50);
+    transform: translateX(4px);
+}
+
+.item:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.item.selected {
+    border-color: var(--primary-teal);
+    background: rgba(13, 148, 136, 0.1);
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
+}
+
+.item.matched {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    color: #065f46;
+}
+
+.complete {
+    text-align: center;
+    padding: var(--spacing-2xl);
+}
+
+.complete h3 {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xl);
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.scoreDisplay {
+    margin: var(--spacing-xl) 0;
+}
+
+.checkIcon {
+    color: #10b981;
+    margin-bottom: var(--spacing-lg);
+    animation: scaleIn 0.5s ease-out;
+}
+
+.scoreDisplay p {
+    font-size: 1.125rem;
+    color: var(--gray-700);
+    margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+    .game {
+        grid-template-columns: 1fr;
+    }
+}

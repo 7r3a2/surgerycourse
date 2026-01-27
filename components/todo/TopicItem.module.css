@@ -1,0 +1,194 @@
+.item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+    animation: fadeIn 0.2s ease-out;
+}
+
+.item:hover {
+    background: var(--gray-100);
+}
+
+.completed {
+    opacity: 0.7;
+}
+
+.checkboxContainer {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: white;
+}
+
+.checkbox:checked~.checkmark {
+    background: var(--gradient-primary);
+    border-color: var(--primary-teal);
+}
+
+.checkboxContainer:hover .checkmark {
+    border-color: var(--primary-teal);
+}
+
+.title {
+    flex: 1;
+    font-size: 0.938rem;
+    color: var(--gray-800);
+    transition: all var(--transition-fast);
+}
+
+.completed .title {
+    text-decoration: line-through;
+    color: var(--gray-500);
+}
+
+.deleteButton {
+    background: none;
+    border: none;
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    color: var(--gray-400);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.item:hover .deleteButton {
+    opacity: 1;
+}
+
+.deleteButton:hover {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+.dragHandle {
+    cursor: grab;
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    transition: all var(--transition-fast);
+    border-radius: var(--radius-sm);
+}
+
+.dragHandle:hover {
+    background: var(--gray-200);
+    color: var(--gray-600);
+}
+
+.dragHandle:active {
+    cursor: grabbing;
+}
+
+.dragging {
+    opacity: 0.5;
+    cursor: grabbing !important;
+}
+
+.dragOver {
+    border-top: 2px solid var(--primary-teal);
+    margin-top: 2px;
+}
+
+.renameInput {
+    flex: 1;
+    padding: 4px 8px;
+    border: 2px solid var(--primary-teal);
+    border-radius: var(--radius-md);
+    font-size: 0.938rem;
+    outline: none;
+    background: white;
+}
+
+.editButton {
+    background: none;
+    border: none;
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    color: var(--gray-400);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.item:hover .editButton {
+    opacity: 1;
+}
+
+.editButton:hover {
+    background: var(--gray-100);
+    color: var(--primary-teal);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .item {
+        padding: var(--spacing-sm);
+        gap: var(--spacing-sm);
+    }
+
+    .checkmark {
+        width: 24px;
+        height: 24px;
+    }
+
+    .title {
+        font-size: 0.875rem;
+    }
+
+    .renameInput {
+        font-size: 0.875rem;
+    }
+
+    .deleteButton,
+    .editButton {
+        opacity: 1;
+        padding: var(--spacing-xs);
+    }
+
+    .dragHandle {
+        padding: var(--spacing-xs);
+    }
+}
+
+@media (max-width: 480px) {
+    .item {
+        padding: var(--spacing-xs);
+    }
+
+    .title {
+        font-size: 0.8rem;
+    }
+}

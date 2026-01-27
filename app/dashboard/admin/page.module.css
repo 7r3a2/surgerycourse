@@ -1,0 +1,520 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.headerIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+    border-radius: 20px;
+    color: white;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+}
+
+.subtitle {
+    color: #64748b;
+    margin: 0.25rem 0 0 0;
+    font-size: 1rem;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.statCard {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.statIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.statLabel {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.statValue {
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.tableCard {
+    padding: 1.5rem;
+    overflow: hidden;
+}
+
+.sectionHeader {
+    margin-bottom: 1rem;
+}
+
+.sectionSubtitle {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.tableTitle {
+    color: #000000;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.subjectActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.subjectList {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+}
+
+.subListTitle {
+    color: #000000;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.subjectItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.subjectItem:last-child {
+    border-bottom: none;
+}
+
+.subjectColor {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.subjectName {
+    color: #000000;
+    font-weight: 500;
+    flex: 1;
+}
+
+.subjectCount {
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.managementList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.mainSubjectGroup {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.mainSubjectHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f1f5f9;
+    margin-bottom: 1rem;
+}
+
+.subjectGroup {
+    margin-left: 2rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px solid #e2e8f0;
+}
+
+.subjectHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.topicList {
+    margin-left: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.topicItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.reorderButtons {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.dragHandle {
+    color: #94a3b8;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+}
+
+.deleteIcon {
+    color: #ef4444;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.deleteIcon:hover {
+    opacity: 1;
+}
+
+/* Filter Section */
+.filterSection {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.searchInput {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+}
+
+.searchInput input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #000000;
+}
+
+.searchInput input:focus {
+    outline: none;
+    border-color: #0d9488;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+.roleFilter {
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #000000;
+    background: white;
+    cursor: pointer;
+    min-width: 140px;
+}
+
+.roleFilter:focus {
+    outline: none;
+    border-color: #0d9488;
+}
+
+.filterInfo {
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.tableContainer {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.table th {
+    color: #64748b;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.table td {
+    color: #000000;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tr:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.userName {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.youBadge {
+    color: #10b981;
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.adminBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+}
+
+.userBadge {
+    display: inline-flex;
+    padding: 0.25rem 0.75rem;
+    background: #e2e8f0;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.dateCell {
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.deleteButton {
+    color: #ef4444 !important;
+    border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+.deleteButton:hover {
+    background: rgba(239, 68, 68, 0.1) !important;
+}
+
+.deleteButtonCompact {
+    color: #ef4444 !important;
+    border-color: transparent !important;
+    padding: 4px !important;
+    min-width: unset !important;
+    height: unset !important;
+}
+
+.deleteButtonCompact:hover {
+    background: rgba(239, 68, 68, 0.1) !important;
+    border-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+.expandIcon {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.expandIcon.expanded {
+    transform: rotate(90deg);
+}
+
+.infoCard {
+    padding: 1.5rem;
+}
+
+.infoCard h3 {
+    color: #000000;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+}
+
+.infoCard ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #64748b;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.infoCard strong {
+    color: #000000;
+}
+
+/* Form Styles */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form input,
+.form textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #000000;
+}
+
+.form input:focus,
+.form textarea:focus {
+    outline: none;
+    border-color: #0d9488;
+}
+
+.selectInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #000000;
+    background: white;
+    cursor: pointer;
+}
+
+.selectInput:disabled {
+    background: #f1f5f9;
+    cursor: not-allowed;
+}
+
+.selectInput:focus {
+    outline: none;
+    border-color: #0d9488;
+}
+
+.colorPicker {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.colorPicker label {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.colorPicker input[type="color"] {
+    width: 50px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .headerIcon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .table th,
+    .table td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .subjectActions {
+        flex-direction: column;
+    }
+
+    .filterSection {
+        flex-direction: column;
+    }
+}

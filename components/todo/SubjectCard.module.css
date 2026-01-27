@@ -1,0 +1,254 @@
+.card {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--primary-teal);
+    transition: all var(--transition-base);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.headerLeft {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    flex: 1;
+}
+
+.expandButton {
+    background: var(--gray-100);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-600);
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.expandButton:hover {
+    background: var(--gray-200);
+    color: var(--gray-900);
+}
+
+.info {
+    flex: 1;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.description {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.actionButton {
+    background: none;
+    border: none;
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    color: var(--gray-500);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionButton:hover {
+    background: var(--gray-100);
+    color: var(--primary-teal);
+}
+
+.progress {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.progressInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progressText {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    font-weight: 600;
+}
+
+.topics {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--gray-200);
+    animation: slideInLeft 0.3s ease-out;
+}
+
+.topicsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.topicsHeader h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--gray-700);
+}
+
+.topicsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.emptyState {
+    text-align: center;
+    color: var(--gray-400);
+    padding: var(--spacing-xl);
+    font-style: italic;
+}
+
+.dragHandle {
+    cursor: grab;
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm);
+    transition: all var(--transition-fast);
+    border-radius: var(--radius-md);
+}
+
+.dragHandle:hover {
+    background: var(--gray-100);
+    color: var(--gray-600);
+}
+
+.dragHandle:active {
+    cursor: grabbing;
+}
+
+.dragging {
+    opacity: 0.5;
+    cursor: grabbing !important;
+}
+
+.dragOver {
+    border-top: 3px solid var(--primary-teal);
+    margin-top: 4px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .card {
+        padding: var(--spacing-lg);
+    }
+
+    .title {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: var(--spacing-md);
+        border-left-width: 3px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-sm);
+    }
+
+    .headerLeft {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .expandButton {
+        align-self: flex-start;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
+    }
+
+    .actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .progress {
+        margin-top: var(--spacing-sm);
+    }
+
+    .progressText {
+        font-size: 0.8rem;
+    }
+
+    .topics {
+        margin-top: var(--spacing-md);
+        padding-top: var(--spacing-md);
+    }
+
+    .topicsHeader h4 {
+        font-size: 0.9rem;
+    }
+
+    .topicsList {
+        gap: var(--spacing-xs);
+    }
+
+    .emptyState {
+        padding: var(--spacing-md);
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: var(--spacing-sm);
+    }
+
+    .title {
+        font-size: 0.95rem;
+    }
+
+    .actionButton {
+        padding: var(--spacing-xs);
+    }
+}
