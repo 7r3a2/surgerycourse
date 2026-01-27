@@ -30,10 +30,14 @@ export async function POST(request: Request) {
 
         const { password: _, ...userWithoutPassword } = user;
         return NextResponse.json(userWithoutPassword);
-    } catch (error) {
+    } catch (error: any) {
         console.error('Login error:', error);
         return NextResponse.json(
-            { error: 'Internal server error' },
+            {
+                error: 'Internal server error',
+                details: error.message,
+                type: error.constructor.name
+            },
             { status: 500 }
         );
     }

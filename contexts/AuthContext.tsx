@@ -90,8 +90,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         return { success: true };
       }
 
-      const error = await response.json();
-      return { success: false, error: error.error || 'Invalid username or password' };
+      const errorData = await response.json();
+      const errorMessage = errorData.details
+        ? `${errorData.error}: ${errorData.details}`
+        : (errorData.error || 'Invalid username or password');
+      return { success: false, error: errorMessage };
     } catch (error) {
       return { success: false, error: 'Connection error' };
     }
@@ -117,8 +120,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         return { success: true };
       }
 
-      const error = await response.json();
-      return { success: false, error: error.error || 'Registration failed' };
+      const errorData = await response.json();
+      const errorMessage = errorData.details
+        ? `${errorData.error}: ${errorData.details}`
+        : (errorData.error || 'Registration failed');
+      return { success: false, error: errorMessage };
     } catch (error) {
       return { success: false, error: 'Connection error' };
     }
