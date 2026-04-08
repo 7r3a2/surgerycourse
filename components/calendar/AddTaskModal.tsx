@@ -19,7 +19,7 @@ export const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, sel
     const [selectedTopicIds, setSelectedTopicIds] = useState<string[]>([]);
     const [calendarTaskTitle, setCalendarTaskTitle] = useState('');
     const [calendarTaskColor, setCalendarTaskColor] = useState('#3b82f6');
-    const { mainSubjects, updateTopicDueDate, addCalendarTask } = useTodo();
+    const { mainSubjects, updateTopicDueDate, addCalendarTask, calendarTasks } = useTodo();
 
     // Get subjects for selected main subject
     const availableSubjects = useMemo(() => {
@@ -203,11 +203,18 @@ export const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, sel
                                             {topic.completed && (
                                                 <span className={styles.completedBadge}>✓ Completed</span>
                                             )}
-                                            {topic.dueDate && (
-                                                <span className={styles.dueDateBadge}>
-                                                    📅 {new Date(topic.dueDate).toLocaleDateString()}
-                                                </span>
-                                            )}
+                                            {(() => {
+                                                // Show date from topic.dueDate OR from calendar_tasks
+                                                const calTask = calendarTasks.find(ct => ct.topicId === topic.id);
+                                                const dateToShow = topic.dueDate
+                                                    ? new Date(topic.dueDate)
+                                                    : calTask ? new Date(calTask.dueDate) : null;
+                                                return dateToShow ? (
+                                                    <span className={styles.dueDateBadge}>
+                                                        📅 {dateToShow.toLocaleDateString()}
+                                                    </span>
+                                                ) : null;
+                                            })()}
                                         </label>
                                     ))}
                                 </div>

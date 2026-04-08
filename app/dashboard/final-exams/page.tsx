@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTodo } from '@/contexts/TodoContext';
 import { BackButton } from '@/components/ui/BackButton';
@@ -74,8 +73,7 @@ function uuid() { return Math.random().toString(36).substring(2, 10); }
 // ── Component ──────────────────────────────────────────────────────────────────
 
 export default function FinalExamsPage() {
-    const router = useRouter();
-    const { currentUser, isAdmin, isLoading: authLoading } = useAuth();
+    const { currentUser, isAdmin } = useAuth();
     const { mainSubjects } = useTodo();
     const [exams, setExams] = useState<ExamEntry[]>([]);
     const [loading, setLoading] = useState(true);
@@ -94,10 +92,7 @@ export default function FinalExamsPage() {
 
     const allDates = buildDates();
 
-    // Admin-only guard
-    useEffect(() => {
-        if (!authLoading && !isAdmin) router.push('/dashboard');
-    }, [authLoading, isAdmin, router]);
+    // (page is visible to all users)
 
     // ── fetch ────────────────────────────────────────────────────────────────
 
@@ -149,6 +144,19 @@ export default function FinalExamsPage() {
         return ms.subjects.flatMap(s =>
             s.topics.map(t => ({ ...t, subjectTitle: s.title, subjectColor: s.color }))
         );
+    };
+
+    // collect all topic IDs already used across ALL free days for a given exam
+    const usedTopicIdsForExam = (exam: ExamEntry): Set<string> => {
+        const used = new Set<string>();
+        for (const d of allDates) {
+            if (examByDate(d)) continue;
+            const ne = nextExamAfter(d);
+            if (!ne || ne.id !== exam.id) continue;
+            const items = dayData[toKey(d)] || [];
+            items.forEach(i => used.add(i.id));
+        }
+        return used;
     };
 
     // count all checked topics across free days for a given exam
@@ -243,8 +251,6 @@ export default function FinalExamsPage() {
 
     // ── render ───────────────────────────────────────────────────────────────
 
-    if (!isAdmin) return null;
-
     if (loading) {
         return (
             <div className={styles.container}>
@@ -306,6 +312,8 @@ export default function FinalExamsPage() {
                                 const dayItems = dayData[key] || [];
                                 const isDropdownOpen = openDropdown === key;
                                 const checkedCount = dayItems.filter(i => i.checked).length;
+                                // all topic IDs already used on ANY day for this exam
+                                const usedIds = nextExam ? usedTopicIdsForExam(nextExam) : new Set<string>();
 
                                 return (
                                     <tr key={key} className={isExam ? styles.examRow : styles.freeRow}>
@@ -404,17 +412,17 @@ export default function FinalExamsPage() {
                                                                 </div>
                                                                 <div className={styles.topicDropdownList}>
                                                                     {topics.map(t => {
-                                                                        const alreadyAdded = dayItems.some(i => i.id === t.id);
+                                                                        const usedOnAnyDay = usedIds.has(t.id);
                                                                         return (
                                                                             <button
                                                                                 key={t.id}
-                                                                                className={`${styles.topicDropdownItem} ${alreadyAdded ? styles.topicDropdownItemAdded : ''}`}
-                                                                                onClick={() => { if (!alreadyAdded) addTopicToDay(key, t.id, t.title); }}
-                                                                                disabled={alreadyAdded}
+                                                                                className={`${styles.topicDropdownItem} ${usedOnAnyDay ? styles.topicDropdownItemAdded : ''}`}
+                                                                                onClick={() => { if (!usedOnAnyDay) addTopicToDay(key, t.id, t.title); }}
+                                                                                disabled={usedOnAnyDay}
                                                                             >
                                                                                 <span className={styles.topicName}>{t.title}</span>
                                                                                 <span className={styles.topicSub} style={{ color: t.subjectColor }}>{t.subjectTitle}</span>
-                                                                                {alreadyAdded && <span className={styles.topicAdded}>Added</span>}
+                                                                                {usedOnAnyDay && <span className={styles.topicAdded}>Added</span>}
                                                                             </button>
                                                                         );
                                                                     })}
@@ -444,11 +452,9 @@ export default function FinalExamsPage() {
                                                         </div>
                                                     )}
                                                 </div>
-                                            ) : (
-                                                isAdmin ? (
-                                                    <button className={styles.assignBtn} onClick={() => openAssign(date)}>+ Set Exam</button>
-                                                ) : null
-                                            )}
+                                            ) : isAdmin ? (
+                                                <button className={styles.assignBtn} onClick={() => openAssign(date)}>+ Set Exam</button>
+                                            ) : null}
                                         </td>
                                     </tr>
                                 );

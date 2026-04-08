@@ -146,20 +146,18 @@ export default function DashboardPage() {
                     </Link>
                 </Card>
 
-                {isAdmin && (
-                    <Card hover variant="glass" className={styles.featureCard}>
-                        <div className={styles.featureIcon} style={{ background: 'linear-gradient(135deg, #0d9488 0%, #3b82f6 100%)' }}>
-                            <GraduationCap size={40} color="white" />
-                        </div>
-                        <h3>Final Exams</h3>
-                        <p>Plan your study before each final exam and track progress day by day.</p>
-                        <Link href="/dashboard/final-exams">
-                            <Button variant="primary" icon={<ArrowRight size={16} />}>
-                                Open Exams
-                            </Button>
-                        </Link>
-                    </Card>
-                )}
+                <Card hover variant="glass" className={styles.featureCard}>
+                    <div className={styles.featureIcon} style={{ background: 'linear-gradient(135deg, #0d9488 0%, #3b82f6 100%)' }}>
+                        <GraduationCap size={40} color="white" />
+                    </div>
+                    <h3>Final Exams</h3>
+                    <p>Plan your study before each final exam and track progress day by day.</p>
+                    <Link href="/dashboard/final-exams">
+                        <Button variant="primary" icon={<ArrowRight size={16} />}>
+                            Open Exams
+                        </Button>
+                    </Link>
+                </Card>
 
                 {isAdmin && (
                     <Card hover variant="glass" className={styles.featureCard}>
