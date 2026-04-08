@@ -81,6 +81,8 @@ export default function CalendarPage() {
                     const sub = ms?.subjects.find(s => s.id === task.subjectId);
                     return {
                         ...task,
+                        calendarTaskId: task.id,
+                        id: task.topicId,
                         mainSubjectId: task.mainSubjectId,
                         subjectId: task.subjectId,
                         color: task.subjectColor || sub?.color || '#3b82f6',

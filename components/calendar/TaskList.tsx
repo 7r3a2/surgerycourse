@@ -18,6 +18,8 @@ interface Task {
     color: string;
     // For calendar tasks
     isCalendarTask?: boolean;
+    // CalendarTask ID when a linked To-Do topic is stored as a CalendarTask record
+    calendarTaskId?: string;
 }
 
 interface TaskListProps {
@@ -65,7 +67,10 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, selectedDate, onEditC
     };
 
     const handleRemove = (task: Task) => {
-        if (task.isCalendarTask) {
+        if (task.calendarTaskId) {
+            // Linked To-Do topic stored as a CalendarTask record — delete the CalendarTask
+            deleteCalendarTask(task.calendarTaskId);
+        } else if (task.isCalendarTask) {
             deleteCalendarTask(task.id);
         } else if (task.mainSubjectId && task.subjectId) {
             // Remove due date by setting it to undefined
