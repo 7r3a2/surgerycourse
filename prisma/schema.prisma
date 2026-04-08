@@ -90,13 +90,17 @@ model FocusSession {
 }
 
 model CalendarTask {
-  id        String   @id @default(uuid())
-  userId    String
-  title     String
-  date      DateTime
-  completed Boolean  @default(false)
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id            String   @id @default(uuid())
+  userId        String
+  title         String
+  date          DateTime
+  completed     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  mainSubjectId String?
+  subjectId     String?
+  subjectColor  String?
+  topicId       String?
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map("calendar_tasks")
@@ -144,4 +148,18 @@ model ScheduledTopic {
 
   @@index([studyPlanId])
   @@map("scheduled_topics")
+}
+
+model ExamSubject {
+  id                  String   @id @default(uuid())
+  title               String
+  examDate            DateTime
+  color               String   @default("#0d9488")
+  order               Int      @default(0)
+  sourceSubjectId     String?
+  sourceMainSubjectId String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@map("exam_subjects")
 }
