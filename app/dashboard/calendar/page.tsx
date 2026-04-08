@@ -21,7 +21,7 @@ export default function CalendarPage() {
     const [isEditCalendarTaskModalOpen, setIsEditCalendarTaskModalOpen] = useState(false);
     const [colorPickerDate, setColorPickerDate] = useState<Date | null>(null);
     const [editingCalendarTask, setEditingCalendarTask] = useState<CalendarTask | null>(null);
-    const { getTasksByDateRange, dayColors, getDayColor, setDayColor, removeDayColor, calendarTasks } = useTodo();
+    const { mainSubjects, getTasksByDateRange, dayColors, getDayColor, setDayColor, removeDayColor, calendarTasks } = useTodo();
 
     // Get tasks for the current month
     const tasksForMonth = useMemo(() => {
@@ -73,15 +73,32 @@ export default function CalendarPage() {
                 const taskDate = new Date(task.dueDate);
                 return taskDate >= startOfDay && taskDate <= endOfDay;
             })
-            .map(task => ({
-                ...task,
-                color: task.color || '#3b82f6',
-                isCalendarTask: true
-            }));
+            .map(task => {
+                // If this task came from the To-Do list (has topicId), show it as a topic task
+                if (task.topicId && task.mainSubjectId && task.subjectId) {
+                    // Look up subject/mainSubject titles from context
+                    const ms = mainSubjects.find(m => m.id === task.mainSubjectId);
+                    const sub = ms?.subjects.find(s => s.id === task.subjectId);
+                    return {
+                        ...task,
+                        mainSubjectId: task.mainSubjectId,
+                        subjectId: task.subjectId,
+                        color: task.subjectColor || sub?.color || '#3b82f6',
+                        subjectTitle: sub?.title || '',
+                        mainSubjectTitle: ms?.title || '',
+                        isCalendarTask: false,
+                    };
+                }
+                return {
+                    ...task,
+                    color: task.color || '#3b82f6',
+                    isCalendarTask: true,
+                };
+            });
 
         // Merge and return all tasks
         return [...topicTasks, ...filteredCalendarTasks];
-    }, [selectedDate, getTasksByDateRange, calendarTasks]);
+    }, [selectedDate, getTasksByDateRange, calendarTasks, mainSubjects]);
 
     const handlePreviousMonth = () => {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));

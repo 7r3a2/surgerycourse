@@ -19,6 +19,10 @@ export interface CalendarTask {
   dueDate: number; // Unix timestamp
   color?: string;
   createdAt: number;
+  mainSubjectId?: string;
+  subjectId?: string;
+  subjectColor?: string;
+  topicId?: string;
 }
 
 export interface Subject {
