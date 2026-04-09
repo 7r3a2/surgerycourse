@@ -41,10 +41,28 @@ const SCHEDULE_END   = new Date(2026, 5, 30);
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
 const sKey = (uid: string) => `final-exams-v2-${uid}`;
-const loadData = (uid: string): DayData => {
+const loadLocal = (uid: string): DayData => {
     try { return JSON.parse(localStorage.getItem(sKey(uid)) || '{}'); } catch { return {}; }
 };
-const saveData = (uid: string, d: DayData) => localStorage.setItem(sKey(uid), JSON.stringify(d));
+const saveLocal = (uid: string, d: DayData) => localStorage.setItem(sKey(uid), JSON.stringify(d));
+
+async function loadServer(uid: string): Promise<DayData> {
+    try {
+        const r = await fetch(`/api/final-exams/day-data?userId=${uid}`);
+        if (r.ok) return await r.json();
+    } catch (e) { console.error('Failed to load day data from server:', e); }
+    return {};
+}
+
+async function saveServer(uid: string, d: DayData) {
+    try {
+        await fetch(`/api/final-exams/day-data?userId=${uid}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(d),
+        });
+    } catch (e) { console.error('Failed to save day data to server:', e); }
+}
 
 function toKey(d: Date) {
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -105,12 +123,35 @@ export default function FinalExamsPage() {
     }, []);
 
     useEffect(() => { fetchExams(); }, [fetchExams]);
-    useEffect(() => { if (currentUser) setDayData(loadData(currentUser.id)); }, [currentUser]);
+
+    useEffect(() => {
+        if (!currentUser) return;
+        const uid = currentUser.id;
+        (async () => {
+            const serverData = await loadServer(uid);
+            const localData = loadLocal(uid);
+            const hasServer = Object.keys(serverData).length > 0;
+            const hasLocal = Object.keys(localData).length > 0;
+
+            if (hasServer) {
+                // Server is source of truth — use it, update local cache
+                setDayData(serverData);
+                saveLocal(uid, serverData);
+            } else if (hasLocal) {
+                // First time: migrate localStorage data to server
+                setDayData(localData);
+                await saveServer(uid, localData);
+            } else {
+                setDayData({});
+            }
+        })();
+    }, [currentUser]);
 
     const persist = useCallback((next: DayData) => {
         if (!currentUser) return;
         setDayData(next);
-        saveData(currentUser.id, next);
+        saveLocal(currentUser.id, next);
+        saveServer(currentUser.id, next);
     }, [currentUser]);
 
     // click outside closes dropdown
